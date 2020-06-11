@@ -1,10 +1,16 @@
 <template>
   <nav class="navbar is-spaced" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item" href="https://bulma.io">
+      <router-link :to="{ name: 'PageHome' }" class="navbar-item">
         <h1 class="title is-4">VueMeetuper</h1>
-      </a>
-      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      </router-link>
+      <a
+        role="button"
+        class="navbar-burger burger"
+        aria-label="menu"
+        aria-expanded="false"
+        data-target="navbarBasicExample"
+      >
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -13,13 +19,13 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <a class="navbar-item">
+        <router-link :to="'/'" class="navbar-item">
           Home
-        </a>
+        </router-link>
 
-        <a class="navbar-item">
+        <router-link :to="'/find'" class="navbar-item">
           Find
-        </a>
+        </router-link>
 
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
@@ -36,7 +42,7 @@
             <a class="navbar-item">
               Contact
             </a>
-            <hr class="navbar-divider">
+            <hr class="navbar-divider" />
             <a class="navbar-item">
               Report an issue
             </a>
@@ -47,12 +53,15 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-primary">
+            <router-link
+              class="button is-primary"
+              :to="{ name: 'PageRegister' }"
+            >
               <strong>Sign up</strong>
-            </a>
-            <a class="button is-light">
+            </router-link>
+            <router-link class="button is-light" :to="{ name: 'PageLogin' }">
               Log in
-            </a>
+            </router-link>
           </div>
         </div>
       </div>
@@ -61,9 +70,7 @@
 </template>
 
 <script>
-  export default {
-  }
+export default {};
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
