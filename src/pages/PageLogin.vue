@@ -102,7 +102,9 @@ export default {
   methods: {
     login() {
       this.$v.form.$touch();
-      this.loginWithEmailAndPassword(this.form);
+      this.loginWithEmailAndPassword({ userData: this.form })
+        .then(() => this.$router.push("/"))
+        .catch(err => console.log(err));
     },
     ...mapActions("auth", ["loginWithEmailAndPassword"])
   }

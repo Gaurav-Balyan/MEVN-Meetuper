@@ -1,0 +1,21 @@
+<template>
+  <div class="container">
+    <ErrorView
+      :title="
+        'Ooooops, you are not authenticated to view this page, please login'
+      "
+      :status="'401'"
+      :navigateToPage="'PageHome'"
+      navigateToText="'Navigate to Login Page'"
+    />
+  </div>
+</template>
+
+<script>
+import ErrorView from "@/components/ErrorView";
+export default {
+  components: {
+    ErrorView
+  }
+};
+</script>

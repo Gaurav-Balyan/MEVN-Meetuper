@@ -214,7 +214,11 @@ export default {
   methods: {
     register() {
       this.$v.form.$touch();
-      this.registerUser(this.form);
+      this.registerUser({ userData: this.form })
+        .then(() => {
+          this.$router.push("/login");
+        })
+        .catch(err => console.log(err));
     },
     ...mapActions("auth", ["registerUser"])
   }
