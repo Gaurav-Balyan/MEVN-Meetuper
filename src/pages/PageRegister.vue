@@ -218,7 +218,11 @@ export default {
         .then(() => {
           this.$router.push("/login");
         })
-        .catch(err => console.log(err));
+        .catch(errorMessage => {
+          this.$toasted.error(errorMessage, {
+            duration: 5000
+          });
+        });
     },
     ...mapActions("auth", ["registerUser"])
   }

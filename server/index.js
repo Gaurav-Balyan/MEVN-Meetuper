@@ -4,13 +4,14 @@ const bodyParser = require("body-parser");
 const config = require("./config/dev");
 const session = require("express-session");
 const passport = require("passport");
-const MongoDBStore = require("connect-mongodb-session")(session);
-const store = new MongoDBStore({
-  uri: config.DB_URI,
-  collection: "meetupperSessions"
-});
 
-store.on("error", error => console.log(error));
+// Uncomment to use Passport Authentication
+// const MongoDBStore = require("connect-mongodb-session")(session);
+// const store = new MongoDBStore({
+//   uri: config.DB_URI,
+//   collection: "meetupperSessions"
+// });
+// store.on("error", error => console.log(error));
 
 require("./models/meetups");
 require("./models/users");
@@ -35,17 +36,19 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.use(
-  session({
-    secret: config.SESSION_SECRET,
-    cookie: { maxAge: 3600000 },
-    resave: false,
-    saveUninitialized: false,
-    store
-  })
-);
-app.use(passport.initialize());
-app.use(passport.session());
+// Uncomment to use Passport Authentication
+// app.use(
+//   session({
+//     secret: config.SESSION_SECRET,
+//     cookie: { maxAge: 3600000 },
+//     resave: false,
+//     saveUninitialized: false,
+//     store
+//   })
+// );
+// app.use(passport.initialize());
+// app.use(passport.session());
+
 app.use("/api/v1/meetups", meetupsRoutes);
 app.use("/api/v1/users", usersRoutes);
 app.use("/api/v1/posts", postsRoutes);

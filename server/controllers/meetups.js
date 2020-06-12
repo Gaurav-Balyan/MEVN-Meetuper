@@ -33,5 +33,5 @@ exports.getMeetupById = function(req, res) {
 };
 
 exports.getSecret = function(req, res) {
-  return res.json({ status: "I am a Secret Page" });
+  return res.json({ status: "I am a Secret Message" });
 };

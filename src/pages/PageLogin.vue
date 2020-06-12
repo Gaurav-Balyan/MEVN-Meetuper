@@ -104,7 +104,11 @@ export default {
       this.$v.form.$touch();
       this.loginWithEmailAndPassword({ userData: this.form })
         .then(() => this.$router.push("/"))
-        .catch(err => console.log(err));
+        .catch(errorMessage => {
+          this.$toasted.error(errorMessage, {
+            duration: 5000
+          });
+        });
     },
     ...mapActions("auth", ["loginWithEmailAndPassword"])
   }

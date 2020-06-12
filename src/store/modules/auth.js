@@ -1,4 +1,15 @@
 import axios from "axios";
+import jwt from "jsonwebtoken";
+import axiosInstance from "@/services/axios";
+import { rejectError } from "@/helpers";
+
+function checkTokenValidity(token) {
+  if (token) {
+    const decodedToken = jwt.decode(token);
+    return decodedToken && decodedToken.exp * 1000 > new Date().getTime();
+  }
+  return false;
+}
 
 export default {
   namespaced: true,
@@ -16,18 +27,26 @@ export default {
   },
   actions: {
     loginWithEmailAndPassword({ state, commit }, payload) {
-      return axios.post("/api/v1/users/login", payload.userData).then(res => {
-        const user = res.data;
-        commit("auth/setAuthUser", user, { root: true });
-        return state.user;
-      });
+      return axios
+        .post("/api/v1/users/login", payload.userData)
+        .then(res => {
+          const user = res.data;
+          localStorage.setItem("meetuper-jwt", user.token);
+          commit("auth/setAuthUser", user, { root: true });
+          return state.user;
+        })
+        .catch(err => rejectError(err));
     },
     registerUser(context, payload) {
-      return axios.post("/api/v1/users/register", payload.userData);
+      return axios
+        .post("/api/v1/users/register", payload.userData)
+        .catch(err => rejectError(err));
     },
     getAuthUser({ commit, getters }) {
       const authUser = getters["authUser"];
-      if (authUser) {
+      const token = localStorage.getItem("meetuper-jwt");
+      const isTokenValid = checkTokenValidity(token);
+      if (authUser && isTokenValid) {
         return Promise.resolve(authUser);
       }
 
@@ -37,10 +56,11 @@ export default {
         }
       };
 
-      return axios
+      return axiosInstance
         .get("/api/v1/users/me", config)
         .then(res => {
           const user = res.data;
+          localStorage.setItem("meetuper-jwt", user.token);
           commit("auth/setAuthUser", user, { root: true });
           commit("auth/setAuthState", true, { root: true });
           return user;
@@ -52,13 +72,19 @@ export default {
         });
     },
     logout({ commit }) {
-      return axios
-        .post("/api/v1/users/logout")
-        .then(() => commit("auth/setAuthUser", null, { root: true }))
-        .catch(err => {
-          commit("auth/setAuthUser", null, { root: true });
-          return err;
-        });
+      // Uncomment to use Passport Authentication
+      // return axios
+      //   .post("/api/v1/users/logout")
+      //   .then(() => commit("auth/setAuthUser", null, { root: true }))
+      //   .catch(err => {
+      //     commit("auth/setAuthUser", null, { root: true });
+      //     return err;
+      //   });
+      return new Promise(resolve => {
+        localStorage.removeItem("meetuper-jwt");
+        commit("auth/setAuthUser", null, { root: true });
+        resolve(true);
+      });
     }
   },
   mutations: {
