@@ -1,4 +1,5 @@
 import axios from "axios";
+import axiosInstance from "@/services/axios";
 
 export default {
   namespaced: true,
@@ -23,6 +24,17 @@ export default {
         commit("meetups/setMeetup", meetup, { root: true });
         return state.meetup;
       });
+    },
+    createMeetup({ rootState, commit }, payload) {
+      payload.meetupToCreate.meetupCreator = rootState.auth.user;
+      payload.meetupToCreate.processedLocation = payload.meetupToCreate.location
+        .toLowerCase()
+        .replace(/[\s,]+/g, "")
+        .trim();
+
+      return axiosInstance
+        .post("/api/v1/meetups", payload.meetupToCreate)
+        .then(res => res.data);
     }
   },
   mutations: {

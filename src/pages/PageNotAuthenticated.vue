@@ -5,8 +5,8 @@
         'Ooooops, you are not authenticated to view this page, please login'
       "
       :status="'401'"
-      :navigateToPage="'PageHome'"
-      navigateToText="'Navigate to Login Page'"
+      :navigateToPage="'PageLogin'"
+      navigateToText="Navigate to Login Page"
     />
   </div>
 </template>
