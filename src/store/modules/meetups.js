@@ -1,4 +1,5 @@
 import axios from "axios";
+import Vue from "vue";
 import axiosInstance from "@/services/axios";
 
 export default {
@@ -25,7 +26,37 @@ export default {
         return state.meetup;
       });
     },
-    createMeetup({ rootState, commit }, payload) {
+    joinMeetup({ state, rootState, commit, dispatch }, payload) {
+      const user = rootState.auth.user;
+      return axiosInstance
+        .post(`/api/v1/meetups/${payload.meetupId}/join`)
+        .then(() => {
+          dispatch("auth/addMeetupToAuthUser", payload.meetupId, {
+            root: true
+          });
+
+          const joinedPeople = state.meetup.joinedPeople;
+          commit("addUsersToMeetup", [...joinedPeople, user]);
+          return true;
+        });
+    },
+    leaveMeetup({ state, rootState, commit, dispatch }, payload) {
+      const user = rootState.auth.user;
+
+      return axiosInstance
+        .post(`/api/v1/meetups/${payload.meetupId}/leave`)
+        .then(() => {
+          dispatch("auth/removeMeetupFromAuthUser", payload.meetupId, {
+            root: true
+          });
+
+          const joinedPeople = state.meetup.joinedPeople;
+          const index = joinedPeople.findIndex(jUser => jUser._id === user._id);
+          joinedPeople.splice(index, 1);
+          commit("addUsersToMeetup", joinedPeople);
+        });
+    },
+    createMeetup({ rootState }, payload) {
       payload.meetupToCreate.meetupCreator = rootState.auth.user;
       payload.meetupToCreate.processedLocation = payload.meetupToCreate.location
         .toLowerCase()
@@ -43,6 +74,9 @@ export default {
     },
     setMeetup(state, meetup) {
       state.meetup = meetup;
+    },
+    addUsersToMeetup(state, joinedPeople) {
+      Vue.set(state.meetup, "joinedPeople", joinedPeople);
     }
   }
 };
