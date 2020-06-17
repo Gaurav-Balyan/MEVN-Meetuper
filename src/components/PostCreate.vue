@@ -33,6 +33,11 @@ export default {
       text: null
     };
   },
+  computed: {
+    meetup() {
+      return this.$store.state.meetups.meetup;
+    }
+  },
   directives: {
     autoExpand
   },
@@ -43,7 +48,12 @@ export default {
           text: this.text,
           threadId: this.threadId
         })
-        .then(() => {
+        .then(createdPost => {
+          // Accessing the socket using custom plugin on the client to emit updates
+          this.$socket.emit("meetup/postSaved", {
+            ...createdPost,
+            meetup: this.meetup._id
+          });
           this.text = "";
         });
     }

@@ -6,6 +6,7 @@ import vuelidate from "vuelidate";
 import moment from "moment";
 import Toasted from "vue-toasted";
 
+import AppSocket from "./plugins/socket";
 import AppDropdown from "./components/shared/AppDropdown";
 import AppHero from "./components/shared/AppHero";
 import AppSpinner from "./components/shared/AppSpinner";
@@ -17,6 +18,7 @@ Vue.component("AppDropdown", AppDropdown);
 Vue.component("AppSpinner", AppSpinner);
 Vue.use(vuelidate);
 Vue.use(Toasted);
+Vue.use(AppSocket, { connection: "http://localhost:3001" });
 
 Vue.filter("capitalize", function(value) {
   if (value && typeof value === "string") {
@@ -30,6 +32,13 @@ Vue.filter("formatDate", function(value, formatType = "LL") {
     return "";
   }
   return moment(value).format(formatType);
+});
+
+Vue.filter("fromNow", function(value) {
+  if (!value) {
+    return "";
+  }
+  return moment(value).fromNow();
 });
 
 new Vue({

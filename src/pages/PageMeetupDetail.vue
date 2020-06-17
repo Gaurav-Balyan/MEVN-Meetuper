@@ -172,10 +172,26 @@ export default {
     const meetupId = this.$route.params.id;
     this.fetchMeetupById({ meetupId });
     this.fetchThreads({ meetupId });
+
+    // Accessing the socket using custom plugin on the client to receive updates
+    if (this.isAuthenticated) {
+      this.$socket.emit("meetup/subscribe", meetupId);
+      this.$socket.on("meetup/postPublished", this.addPostToThreadHandler);
+    }
+  },
+  destroyed() {
+    this.$socket.removeListener(
+      "meetup/postPublished",
+      this.addPostToThreadHandler
+    );
+    this.$socket.emit("meetup/unsubscribe", this.meetup._id);
   },
   methods: {
     ...mapActions("meetups", ["fetchMeetupById"]),
-    ...mapActions("threads", ["fetchThreads", "postThread"]),
+    ...mapActions("threads", ["fetchThreads", "postThread", "addPostToThread"]),
+    addPostToThreadHandler(post) {
+      this.addPostToThread({ post, threadId: post.thread });
+    },
     joinMeetup() {
       this.$store.dispatch("meetups/joinMeetup", { meetupId: this.meetup._id });
     },
