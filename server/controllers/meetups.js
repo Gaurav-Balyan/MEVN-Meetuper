@@ -2,8 +2,7 @@ const Meetup = require("../models/meetups");
 const User = require("../models/users");
 
 exports.getMeetups = function(req, res) {
-  const { category } = req.query || {};
-  const { location } = req.query || {};
+  const { category, location } = req.query;
 
   const findQuery = location
     ? Meetup.find({ processedLocation: { $regex: ".*" + location + ".*" } })

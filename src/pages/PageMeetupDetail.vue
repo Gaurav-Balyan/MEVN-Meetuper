@@ -115,6 +115,17 @@
               />
             </div>
             <ThreadList :threads="orderedThreads" :canMakePost="canMakePost" />
+            <button
+              v-if="!isAllThreadsLoaded"
+              @click="
+                () => {
+                  this.fetchThreadsHandler(this.meetup._id);
+                }
+              "
+              class="button is-primary"
+            >
+              Load More Threads
+            </button>
           </div>
         </div>
       </div>
@@ -131,12 +142,19 @@ export default {
     ThreadCreateModal,
     ThreadList
   },
+  data() {
+    return {
+      threadPageNum: 1,
+      threadPageSize: 5
+    };
+  },
   computed: {
     // Accessing the state directly from the store without getters
     ...mapState({
       meetup: state => state.meetups.meetup,
       threads: state => state.threads.threads,
-      authUser: state => state.auth.user
+      authUser: state => state.auth.user,
+      isAllThreadsLoaded: state => state.threads.isAllThreadsLoaded
     }),
     orderedThreads() {
       const threadsCollection = [...this.threads];
@@ -171,7 +189,7 @@ export default {
   created() {
     const meetupId = this.$route.params.id;
     this.fetchMeetupById({ meetupId });
-    this.fetchThreads({ meetupId });
+    this.fetchThreadsHandler(meetupId, true);
 
     // Accessing the socket using custom plugin on the client to receive updates
     if (this.isAuthenticated) {
@@ -189,6 +207,15 @@ export default {
   methods: {
     ...mapActions("meetups", ["fetchMeetupById"]),
     ...mapActions("threads", ["fetchThreads", "postThread", "addPostToThread"]),
+    fetchThreadsHandler(meetupId, init) {
+      const filter = {
+        pageNum: this.threadPageNum,
+        pageSize: this.threadPageSize
+      };
+      this.fetchThreads({ meetupId: meetupId, filter, init }).then(() => {
+        this.threadPageNum++;
+      });
+    },
     addPostToThreadHandler(post) {
       this.addPostToThread({ post, threadId: post.thread });
     },

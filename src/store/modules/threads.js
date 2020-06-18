@@ -2,21 +2,28 @@ import axios from "axios";
 import axiosInstance from "@/services/axios";
 import Vue from "vue";
 
+import { applyFilters } from "@/helpers";
+
 export default {
   namespaced: true,
   state: {
+    isAllThreadsLoaded: false,
     threads: []
   },
   getters: {},
   actions: {
-    fetchThreads({ state, commit }, payload) {
-      return axios
-        .get(`/api/v1/threads?meetupId=${payload.meetupId}`)
-        .then(res => {
-          const threads = res.data;
-          commit("threads/setThreads", threads, { root: true });
-          return state.threads;
-        });
+    fetchThreads({ state, commit }, { meetupId, filter = {}, init }) {
+      // Check if need to reset threads in page revisit after load more threads has loaded many threads
+      if (init) {
+        commit("threads/setThreads", [], { root: true });
+      }
+      const url = applyFilters(`/api/v1/threads?meetupId=${meetupId}`, filter);
+      return axios.get(url).then(res => {
+        const { threads, isAllDataLoaded } = res.data;
+        commit("setAllDataLoaded", isAllDataLoaded);
+        commit("threads/mergeThreads", threads, { root: true });
+        return state.threads;
+      });
     },
     postThread({ state, commit }, payload) {
       const thread = {};
@@ -72,6 +79,12 @@ export default {
     },
     savePostToThread(state, { posts, index }) {
       Vue.set(state.threads[index], "posts", posts);
+    },
+    setAllDataLoaded(state, isAllDataLoaded) {
+      state.isAllThreadsLoaded = isAllDataLoaded;
+    },
+    mergeThreads(state, threads) {
+      state.threads = [...state.threads, ...threads];
     }
   }
 };
