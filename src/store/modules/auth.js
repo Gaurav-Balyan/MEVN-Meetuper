@@ -85,6 +85,15 @@ export default {
           return err;
         });
     },
+    updateUser({ commit }, payload) {
+      return axiosInstance
+        .patch(`/api/v1/users/${payload.user._id}`, payload.user)
+        .then(res => {
+          const updatedUser = res.data;
+          commit("auth/setAuthUser", updatedUser);
+          return updatedUser;
+        });
+    },
     logout({ commit }) {
       // Uncomment to use Passport Authentication
       // return axios
