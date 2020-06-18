@@ -2,6 +2,8 @@ import axios from "axios";
 import Vue from "vue";
 import axiosInstance from "@/services/axios";
 
+import { applyFilters } from "@/helpers";
+
 export default {
   namespaced: true,
   state: {
@@ -10,9 +12,10 @@ export default {
   },
   getters: {},
   actions: {
-    fetchMeetups({ state, commit }) {
+    fetchMeetups({ state, commit }, options = {}) {
       commit("meetups/setMeetups", [], { root: true });
-      return axios.get("/api/v1/meetups").then(res => {
+      const url = applyFilters("/api/v1/meetups", options.filter);
+      return axios.get(url).then(res => {
         const meetups = res.data;
         commit("meetups/setMeetups", meetups, { root: true });
         return state.meetups;
