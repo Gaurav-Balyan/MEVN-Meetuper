@@ -84,6 +84,13 @@ export default {
           commit("mergeMeetup", updatedMeetup);
           return updatedMeetup;
         });
+    },
+    deleteMeetup(_, meetupId) {
+      return axiosInstance.delete(`/api/v1/meetups/${meetupId}`).then(res => {
+        const meetupId = res.data;
+        // commit("mergeMeetup", updatedMeetup);
+        return meetupId;
+      });
     }
   },
   mutations: {
