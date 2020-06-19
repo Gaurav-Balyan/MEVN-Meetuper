@@ -1,3 +1,4 @@
+<!-- verified -->
 <template>
   <form class="post-create">
     <div class="field">
@@ -35,14 +36,17 @@ export default {
   },
   computed: {
     meetup() {
+      // Accessing the state in the store directly
       return this.$store.state.meetups.meetup;
     }
   },
   directives: {
+    // Directive to auto extend the height of the textarea on scroll
     autoExpand
   },
   methods: {
     sendPost() {
+      // Dispatching the action directly on the store
       this.$store
         .dispatch("threads/sendPost", {
           text: this.text,
@@ -61,7 +65,7 @@ export default {
 };
 </script>
 
-// Need to specify if we are using SCSS
+<!-- Need to specify if we are using SCSS -->
 <style scoped lang="scss">
 .textarea-post {
   padding-bottom: 30px;

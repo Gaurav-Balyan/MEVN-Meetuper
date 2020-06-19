@@ -69,6 +69,21 @@ export default {
       return axiosInstance
         .post("/api/v1/meetups", payload.meetupToCreate)
         .then(res => res.data);
+    },
+    updateMeetup({ commit, rootState }, meetup) {
+      meetup.meetupCreator = rootState.auth.user;
+      meetup.processedLocation = meetup.location
+        .toLowerCase()
+        .replace(/[\s,]+/g, "")
+        .trim();
+
+      return axiosInstance
+        .patch(`/api/v1/meetups/${meetup._id}`, meetup)
+        .then(res => {
+          const updatedMeetup = res.data;
+          commit("mergeMeetup", updatedMeetup);
+          return updatedMeetup;
+        });
     }
   },
   mutations: {
@@ -77,6 +92,9 @@ export default {
     },
     setMeetup(state, meetup) {
       state.meetup = meetup;
+    },
+    mergeMeetup(state, updatedMeetup) {
+      state.meetup = { ...state.meetup, ...updatedMeetup };
     },
     addUsersToMeetup(state, joinedPeople) {
       Vue.set(state.meetup, "joinedPeople", joinedPeople);

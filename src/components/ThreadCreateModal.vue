@@ -1,3 +1,4 @@
+<!-- verified -->
 <template>
   <div>
     <button @click="isOpen = !isOpen" class="button is-success">
@@ -65,6 +66,7 @@ export default {
       const { title } = this.form;
       this.$emit("threadSubmitted", {
         title,
+        // Invoke this callback once the response is received
         done: () => {
           this.form.title = "";
           this.isOpen = false;

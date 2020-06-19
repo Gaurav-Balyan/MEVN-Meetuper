@@ -1,8 +1,8 @@
+<!-- verified -->
 <template>
   <div class="content is-medium">
     <h3 class="title is-3">Threads</h3>
     <div v-for="thread in threads" :key="thread._id" class="box">
-      <!-- Thread title -->
       <h4 id="const" class="title is-3">
         {{ thread.title }}
       </h4>
@@ -21,10 +21,8 @@
         <div class="media-content">
           <div class="content is-medium">
             <div class="post-content">
-              <!-- Post User Name -->
               <strong class="author">{{ post.user.name }}</strong>
               {{ " " }}
-              <!-- Post Updated at -->
               <small class="post-time"> {{ post.updatedAt | fromNow }}</small>
               <br />
               <p class="post-content-message">{{ post.text }}</p>
@@ -56,7 +54,7 @@ export default {
 };
 </script>
 
-// Need to specify if we are using SCSS
+<!-- Need to specify if we are using SCSS -->
 <style scoped lang="scss">
 .content {
   figure {
@@ -75,9 +73,6 @@ export default {
 .media-left.user-image {
   margin: 0;
   margin-right: 15px;
-}
-
-.post-item {
 }
 
 .media + .media {

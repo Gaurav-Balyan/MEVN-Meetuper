@@ -1,3 +1,4 @@
+// <!-- verified -->
 import io from "socket.io-client";
 
 // Custom plugin used to initiate socket connection on client

@@ -1,3 +1,4 @@
+<!-- verified -->
 <template>
   <div class="meetup-create-page">
     <AppHero />
@@ -17,18 +18,19 @@ export default {
   },
   computed: {
     categories() {
+      // Accessing the state in the store directly
       return this.$store.state.categories.categories;
     }
   },
   created() {
     if (this.categories.length === 0) {
-      // Directly dispatching the action in the store
+      // Directly dispatching the action in the store without mapping actions
       this.$store.dispatch("categories/fetchCategories");
     }
   },
   methods: {
     createMeetup(meetupToCreate) {
-      // Directly dispatching the action in the store
+      // Directly dispatching the action in the store without mapping actions
       this.$store
         .dispatch("meetups/createMeetup", { meetupToCreate })
         .then(createdMeetup => {

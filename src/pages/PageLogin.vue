@@ -101,6 +101,7 @@ export default {
   },
   methods: {
     login() {
+      // To handle the case user directly clicks without touching the text controls
       this.$v.form.$touch();
       this.loginWithEmailAndPassword({ userData: this.form })
         .then(() => this.$router.push("/"))
@@ -110,6 +111,7 @@ export default {
           });
         });
     },
+    // Map the actions from the store
     ...mapActions("auth", ["loginWithEmailAndPassword"])
   }
 };

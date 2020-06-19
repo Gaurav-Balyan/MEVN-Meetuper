@@ -18,7 +18,7 @@ export default {
   },
   getters: {},
   actions: {
-    fetchUserStats({ state, commit }) {
+    fetchUserStats({ commit }) {
       return axiosInstance.get("/api/v1/users/me/activity").then(res => {
         const stats = res.data;
         commit("stats/setStats", stats, { root: true });

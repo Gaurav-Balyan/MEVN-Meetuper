@@ -1,3 +1,4 @@
+<!-- verified -->
 <template>
   <div class="columns">
     <div class="container profile">
@@ -20,7 +21,6 @@
               {{ user.info }}
             </p>
           </div>
-          <!-- TODO: Set Active Tab to 'meetups' and class to 'isActive' -->
           <div
             @click="activeTab = 'meetups'"
             :class="{ isActive: activeTab === 'meetups' }"
@@ -29,7 +29,6 @@
             <p class="stat-val">{{ meetupsCount }}</p>
             <p class="stat-key">Meetups</p>
           </div>
-          <!-- TODO: Set Active Tab to 'threads' and class to 'isActive' -->
           <div
             @click="activeTab = 'threads'"
             :class="{ isActive: activeTab === 'threads' }"
@@ -38,7 +37,6 @@
             <p class="stat-val">{{ threadsCount }}</p>
             <p class="stat-key">Threads</p>
           </div>
-          <!-- TODO: Set Active Tab to 'posts' and class to 'isActive' -->
           <div
             @click="activeTab = 'posts'"
             :class="{ isActive: activeTab === 'posts' }"
@@ -49,7 +47,6 @@
           </div>
         </div>
       </div>
-      <!-- TODO: Display this div when activeTab === 'meetups' -->
       <div
         v-if="activeTab === 'meetups'"
         class="columns is-mobile is-multiline"
@@ -84,14 +81,20 @@
               </div>
             </div>
             <footer class="card-footer">
-              <a class="card-footer-item">Share</a>
+              <router-link
+                :to="{
+                  name: 'PageMeetupEdit',
+                  params: { meetupId: meetup._id }
+                }"
+                class="card-footer-item"
+                >Edit</router-link
+              >
               <a class="card-footer-item">Delete</a>
             </footer>
           </div>
           <br />
         </div>
       </div>
-      <!-- TODO: Display this div when activeTab === 'threads' -->
       <div
         v-if="activeTab === 'threads'"
         class="columns is-mobile is-multiline"
@@ -119,7 +122,6 @@
           <br />
         </div>
       </div>
-      <!-- TODO: Display this div when activeTab === 'posts' -->
       <div v-if="activeTab === 'posts'" class="columns is-mobile is-multiline">
         <div
           v-for="post in posts"
@@ -164,6 +166,7 @@ export default {
     this.fetchUserStats().then(stats => console.log(stats));
   },
   computed: {
+    // Mapping the state directly in local properties of component from the store
     ...mapState({
       user: state => state.auth.user,
       meetups: state => state.stats.meetups.data,
@@ -175,6 +178,7 @@ export default {
     })
   },
   methods: {
+    // Map the actions from the store
     ...mapActions("stats", ["fetchUserStats"]),
     updateUser({ user, done }) {
       this.$store

@@ -1,3 +1,4 @@
+<!-- verified -->
 <template>
   <section class="hero is-primary is-medium">
     <div class="hero-bg">
@@ -16,8 +17,7 @@
 </template>
 
 <script>
-  export default {}
+export default {};
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

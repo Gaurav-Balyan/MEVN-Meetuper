@@ -1,3 +1,4 @@
+<!-- verified -->
 <template>
   <div>
     <button
@@ -66,6 +67,7 @@ export default {
     emitUser() {
       this.$emit("userSubmitted", {
         user: this.user,
+        // Invoke this callback once the response is received
         done: () => {
           this.isOpen = false;
         }

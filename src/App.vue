@@ -19,13 +19,16 @@ export default {
   },
   computed: {
     isAuthResolved() {
+      // Accessing the state in the store directly
       return this.$store.state.auth.isAuthResolved;
     },
     isLocationResolved() {
+      // Accessing the state in the store directly
       return this.$store.state.meta.isLocationResolved;
     }
   },
   created() {
+    // Directly dispatching the action in the store without mapping actions
     this.$store.dispatch("meta/fetchMetaData");
   }
 };

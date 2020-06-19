@@ -1,3 +1,4 @@
+<!-- verified -->
 <template>
   <div>
     <h1 class="title m-b-sm">Please confirm entered data</h1>

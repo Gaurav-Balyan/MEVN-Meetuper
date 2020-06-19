@@ -1,3 +1,4 @@
+// verified
 export default {
   data() {
     return {

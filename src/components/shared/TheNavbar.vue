@@ -1,7 +1,8 @@
+<!-- verified -->
 <template>
   <nav class="navbar is-spaced" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <router-link :to="'/'" class="navbar-item" href="https://bulma.io">
+      <router-link :to="'/'" class="navbar-item">
         <h1 class="title is-4">VueMeetuper</h1>
       </router-link>
       <a
@@ -90,12 +91,14 @@
 import { mapGetters } from "vuex";
 export default {
   computed: {
+    // Accessing the getter from the store
     ...mapGetters({
       user: "auth/authUser"
     })
   },
   methods: {
     logout() {
+      // Dispatching the action directly on the store
       this.$store
         .dispatch("auth/logout")
         .then(() => this.$router.push("/login"));

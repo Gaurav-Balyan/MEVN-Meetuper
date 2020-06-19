@@ -1,9 +1,11 @@
+<!-- verified -->
 <template>
   <div class="meetup-create-form">
     <div class="current-step is-pulled-right">
       {{ currentStep }} of {{ allStepsCount }}
     </div>
     <!-- Form Steps -->
+    <!-- Creating dynamic component to display steps -->
     <keep-alive>
       <component
         :is="currentComponent"

@@ -1,3 +1,4 @@
+<!-- verified -->
 <template>
   <div class="meetup-detail-page">
     <section class="hero">
@@ -149,7 +150,7 @@ export default {
     };
   },
   computed: {
-    // Accessing the state directly from the store without getters
+    // Mapping the state directly in local properties of component from the store
     ...mapState({
       meetup: state => state.meetups.meetup,
       threads: state => state.threads.threads,
@@ -167,7 +168,7 @@ export default {
       return this.meetup.meetupCreator || {};
     },
     isAuthenticated() {
-      // Accessing the getter in the store directly
+      // Accessing getter in the store directly without mapping getters
       return this.$store.getters["auth/isAuthenticated"];
     },
     isMeetupOwner() {
@@ -179,7 +180,6 @@ export default {
       return this.$store.getters["auth/isMember"](this.meetup._id);
     },
     canJoin() {
-      // Accessing the getter in the store directly
       return !this.isMeetupOwner && this.isAuthenticated && !this.isMember;
     },
     canMakePost() {
@@ -198,6 +198,7 @@ export default {
     }
   },
   destroyed() {
+    // Removing the socket listener on component destroy
     this.$socket.removeListener(
       "meetup/postPublished",
       this.addPostToThreadHandler
@@ -205,6 +206,7 @@ export default {
     this.$socket.emit("meetup/unsubscribe", this.meetup._id);
   },
   methods: {
+    // Map the actions from the store
     ...mapActions("meetups", ["fetchMeetupById"]),
     ...mapActions("threads", ["fetchThreads", "postThread", "addPostToThread"]),
     fetchThreadsHandler(meetupId, init) {
@@ -220,9 +222,11 @@ export default {
       this.addPostToThread({ post, threadId: post.thread });
     },
     joinMeetup() {
+      // Directly dispatching the action in the store without mapping actions
       this.$store.dispatch("meetups/joinMeetup", { meetupId: this.meetup._id });
     },
     leaveMeetup() {
+      // Directly dispatching the action in the store without mapping actions
       this.$store.dispatch("meetups/leaveMeetup", {
         meetupId: this.meetup._id
       });

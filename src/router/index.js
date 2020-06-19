@@ -1,3 +1,4 @@
+// <!-- verified -->
 import Vue from "vue";
 import Router from "vue-router";
 import store from "@/store";
@@ -6,6 +7,7 @@ import PageHome from "@/pages/PageHome";
 import PageMeetupDetail from "@/pages/PageMeetupDetail";
 import PageMeetupCreate from "@/pages/PageMeetupCreate";
 import PageMeetupFind from "@/pages/PageMeetupFind";
+import PageMeetupEdit from "@/pages/PageMeetupEdit";
 import PageLogin from "@/pages/PageLogin";
 import PageRegister from "@/pages/PageRegister";
 import PageSecret from "@/pages/PageSecret";
@@ -51,6 +53,14 @@ const router = new Router({
       path: "/meetups/secret",
       name: "PageSecret",
       component: PageSecret,
+      // Providing additional information to this route
+      meta: { onlyAuthUser: true }
+    },
+    {
+      path: "/meetups/:meetupId/edit",
+      name: "PageMeetupEdit",
+      component: PageMeetupEdit,
+      props: true,
       // Providing additional information to this route
       meta: { onlyAuthUser: true }
     },

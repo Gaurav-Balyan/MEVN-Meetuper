@@ -1,3 +1,4 @@
+<!-- verified -->
 <template>
   <div class="column is-one-quarter" :style="{ 'min-height': '160px' }">
     <router-link

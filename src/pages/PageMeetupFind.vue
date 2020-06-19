@@ -1,3 +1,4 @@
+<!-- verified -->
 <template>
   <div>
     <div class="lookup-prebody">
@@ -107,12 +108,14 @@ export default {
   mixins: [pageLoader],
   data() {
     return {
+      // Accessing getter in the store directly without mapping getters
       searchedLocation: this.$store.getters["meta/location"],
       filter: {}
     };
   },
   computed: {
     meetups() {
+      // Accessing the state in the store directly
       return this.$store.state.meetups.meetups;
     }
   },

@@ -1,3 +1,4 @@
+<!-- verified -->
 <template>
   <form @input="emitFormData">
     <div class="field">
@@ -81,6 +82,7 @@ export default {
   data() {
     return {
       disabledDates: {
+        // Check to disable future dates
         customPredictor: function(date) {
           const today = new Date();
           const yesterday = today.setDate(today.getDate() - 1);
@@ -107,6 +109,7 @@ export default {
   },
   computed: {
     categories() {
+      // Accessing the state in the store directly
       return this.$store.state.categories.categories;
     }
   },

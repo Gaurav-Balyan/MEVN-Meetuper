@@ -1,3 +1,4 @@
+<!-- verified -->
 <template>
   <section class="hero is-success is-fullheight">
     <div class="hero-body">
@@ -213,6 +214,7 @@ export default {
   },
   methods: {
     register() {
+      // To handle the case user directly clicks without touching the text controls
       this.$v.form.$touch();
       this.registerUser({ userData: this.form })
         .then(() => {
@@ -224,6 +226,7 @@ export default {
           });
         });
     },
+    // Map the actions from the store
     ...mapActions("auth", ["registerUser"])
   }
 };

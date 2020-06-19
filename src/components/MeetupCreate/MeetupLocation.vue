@@ -1,3 +1,4 @@
+<!-- verified -->
 <template>
   <div>
     <h1 class="title m-b-sm">What's your new Meetup location?</h1>
@@ -46,6 +47,7 @@ export default {
   },
   computed: {
     ipLocation() {
+      // Accessing getter in the store directly without mapping getters
       return this.$store.getters["meta/location"];
     }
   },

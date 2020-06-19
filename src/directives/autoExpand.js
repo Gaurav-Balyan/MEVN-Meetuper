@@ -1,3 +1,4 @@
+// <!-- verified -->
 // To expand the height of the textbox according to input by user
 export default {
   bind(el) {

@@ -1,5 +1,7 @@
+// <!-- verified -->
 import { helpers } from "vuelidate/lib/validators";
 
+// Custom validator
 export const supportedFileType = value => {
   if (!helpers.req(value)) {
     return true;
