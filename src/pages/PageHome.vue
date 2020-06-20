@@ -3,13 +3,10 @@
   <div>
     <AppHero />
     <div v-if="pageLoader_isDataLoaded" class="container">
-      <section class="section">
+      <section class="section no-bottom-pdg">
         <div class="m-b-lg">
           <h1 class="title is-inline">
             Featured Meetups
-            <span v-if="ipLocation && !displayAllMeetups"
-              >in {{ ipLocation }}</span
-            >
           </h1>
           <AppDropdown />
           <router-link
@@ -19,12 +16,12 @@
           >
             Create Meetups
           </router-link>
-          <button
-            @click="fetchAllMeetups"
+          <router-link
+            :to="{ name: 'PageMeetupFind' }"
             class="button is-primary is-pulled-right m-r-sm"
           >
             All
-          </button>
+          </router-link>
         </div>
         <div class="row columns is-multiline">
           <MeetupItem
@@ -33,8 +30,19 @@
             :meetup="meetup"
           ></MeetupItem>
         </div>
+        <div class="paginate-align">
+          <paginate
+            v-model="pagination.pageNum"
+            :page-count="pagination.pageCount"
+            :click-handler="fetchPaginatedMeetups"
+            :prev-text="'Prev'"
+            :next-text="'Next'"
+            :container-class="'paginationContainer'"
+          >
+          </paginate>
+        </div>
       </section>
-      <section class="section">
+      <section class="section no-top-pdg no-bottom-pdg">
         <div>
           <h1 class="title">Categories</h1>
           <div class="columns cover is-multiline is-mobile">
@@ -58,7 +66,6 @@ import CategoryItem from "@/components/CategoryItem";
 import MeetupItem from "@/components/MeetupItem";
 import { mapActions, mapState, mapGetters } from "vuex";
 import pageLoader from "@/mixins/pageLoader";
-import { processLocation } from "@/helpers";
 export default {
   components: {
     CategoryItem,
@@ -80,17 +87,17 @@ export default {
     // Accessing the state directly from the store without getters
     ...mapState({
       meetups: state => state.meetups.meetups,
-      categories: state => state.categories.categories
+      categories: state => state.categories.categories,
+      pagination: state => state.meetups.pagination
     })
   },
   async created() {
-    const filter = {};
-    if (this.ipLocation) {
-      filter["location"] = processLocation(this.ipLocation);
+    const { pageSize, pageNum } = this.$route.query;
+    if (pageSize && pageNum) {
+      this.initializePagesFromQuery({ pageSize, pageNum });
     }
-
     try {
-      await this.fetchMeetups({ filter });
+      await this.handleFetchMeetups({});
       await this.fetchCategories();
       this.pageLoader_resolveData();
     } catch (err) {
@@ -100,14 +107,86 @@ export default {
   },
   methods: {
     // Map the actions from the store
-    ...mapActions("meetups", ["fetchMeetups"]),
+    ...mapActions("meetups", ["fetchMeetups", "initializePagesFromQuery"]),
     ...mapActions("categories", ["fetchCategories"]),
-    fetchAllMeetups() {
-      this.displayAllMeetups = true;
-      this.fetchMeetups();
+    handleFetchMeetups({ reset }) {
+      const filter = {};
+      filter["pageSize"] = this.pagination.pageSize;
+      filter["pageNum"] = this.pagination.pageNum;
+      return this.fetchMeetups({ filter, reset }).then(() =>
+        this.setQueryPaginationParams()
+      );
+    },
+    fetchPaginatedMeetups(page) {
+      this.setPage(page);
+      this.handleFetchMeetups({ reset: false });
+    },
+    setPage(page) {
+      // Calling the mutation directly bypassing action
+      this.$store.commit("meetups/setPage", page);
+    },
+    setQueryPaginationParams() {
+      const { pageSize, pageNum } = this.pagination;
+      this.$router.push({ query: { pageNum, pageSize } });
     }
   }
 };
 </script>
 
-<style scoped></style>
+<style lang="scss">
+.paginate-align {
+  display: flex;
+  justify-content: center;
+}
+
+.no-top-pdg {
+  padding-top: 0px;
+}
+
+.no-bottom-pdg {
+  padding-bottom: 0px;
+}
+
+.paginationContainer {
+  display: inline-block;
+  padding-left: 0;
+  margin: 20px 0;
+  border-radius: 4px;
+
+  > li {
+    display: inline;
+    font-size: 18px;
+
+    > a {
+      position: relative;
+      float: left;
+      padding: 6px 12px;
+      margin-left: -1px;
+      line-height: 1.42857143;
+      color: #00d1b2;
+      text-decoration: none;
+      background-color: #fff;
+      border: 1px solid #ddd;
+    }
+
+    &.active {
+      > a {
+        z-index: 2;
+        color: #fff;
+        cursor: default;
+        background-color: #00d1b2;
+        border-color: #00d1b2;
+      }
+    }
+
+    &.disabled {
+      > a {
+        color: #777;
+        cursor: not-allowed;
+        background-color: #fff;
+        border-color: #ddd;
+      }
+    }
+  }
+}
+</style>

@@ -3,7 +3,9 @@ const Meetup = require("../models/meetups");
 const Thread = require("../models/threads");
 const Post = require("../models/posts");
 const Category = require("../models/categories");
+const ConfirmationHash = require("../models/confirmation-hash");
 const passport = require("passport");
+const mailer = require("../services//mailer");
 
 exports.getUsers = function(req, res) {
   User.find({}).exec((errors, users) => {
@@ -61,8 +63,23 @@ exports.register = function(req, res) {
     if (errors) {
       return res.status(422).json({ errors });
     }
+    const hash = new ConfirmationHash({ user: savedUser });
+    hash.save(errors => {
+      if (errors) {
+        return res.status(422).json({ errors });
+      }
 
-    return res.json(savedUser);
+      mailer.sendConfirmationEmail(
+        { toUser: savedUser, hash: hash.id },
+        (errors, info) => {
+          if (errors) {
+            return res.status(422).json({ errors });
+          }
+
+          return res.json(savedUser);
+        }
+      );
+    });
   });
 };
 
@@ -91,14 +108,22 @@ exports.login = function(req, res, next) {
       return next(err);
     }
     if (passportUser) {
-      // Uncomment to use Passport Authentication
-      // req.login(passportUser, function(err) {
-      //   if (err) {
-      //     next(err);
-      //   }
-      //   return res.json(passportUser);
-      // });
-      return res.json(passportUser.toAuthJson());
+      if (passportUser.active) {
+        // Uncomment to use Passport Authentication
+        // req.login(passportUser, function(err) {
+        //   if (err) {
+        //     next(err);
+        //   }
+        //   return res.json(passportUser);
+        // });
+        return res.json(passportUser.toAuthJson());
+      } else {
+        return res.status(422).send({
+          errors: {
+            message: "Please check your email in order to activate account"
+          }
+        });
+      }
     } else {
       return res.status(422).send({
         errors: {
@@ -247,4 +272,30 @@ exports.updateUser = (req, res) => {
   } else {
     return res.status(422).send({ errors: "Authorization Error!" });
   }
+};
+
+exports.activateUser = function(req, res) {
+  const { hash } = req.params;
+
+  ConfirmationHash.findById(hash)
+    .populate("user")
+    .exec((errors, foundHash) => {
+      if (errors) {
+        return res.status(422).send({ errors });
+      }
+
+      User.findByIdAndUpdate(
+        foundHash.user.id,
+        { $set: { active: true } },
+        { new: true },
+        (errors, updatedUser) => {
+          if (errors) {
+            return res.status(422).send({ errors });
+          }
+
+          foundHash.remove(() => {});
+          return res.json(updatedUser);
+        }
+      );
+    });
 };

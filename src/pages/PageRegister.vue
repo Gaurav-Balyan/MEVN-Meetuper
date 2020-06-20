@@ -160,6 +160,7 @@
 
 <script>
 import { mapActions } from "vuex";
+import { USER_REGISTERED } from "@/helpers/redirectMessages";
 import {
   required,
   email,
@@ -218,7 +219,10 @@ export default {
       this.$v.form.$touch();
       this.registerUser({ userData: this.form })
         .then(() => {
-          this.$router.push("/login");
+          this.$router.push({
+            path: "/login",
+            query: { messageType: USER_REGISTERED.type }
+          });
         })
         .catch(errorMessage => {
           this.$toasted.error(errorMessage, {

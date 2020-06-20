@@ -5,6 +5,7 @@ import router from "./router";
 import store from "./store";
 import vuelidate from "vuelidate";
 import Toasted from "vue-toasted";
+import Paginate from "vuejs-paginate";
 
 import AppSocket from "./plugins/socket";
 import AppDropdown from "./components/shared/AppDropdown";
@@ -17,6 +18,8 @@ Vue.config.productionTip = false;
 Vue.component("AppHero", AppHero);
 Vue.component("AppDropdown", AppDropdown);
 Vue.component("AppSpinner", AppSpinner);
+Vue.component("paginate", Paginate);
+
 Vue.use(vuelidate);
 Vue.use(Toasted);
 Vue.use(AppSocket, { connection: "http://localhost:3001" });

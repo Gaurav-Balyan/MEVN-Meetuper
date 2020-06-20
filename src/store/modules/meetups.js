@@ -8,16 +8,25 @@ export default {
   namespaced: true,
   state: {
     meetups: [],
-    meetup: {}
+    meetup: {},
+    pagination: {
+      count: 0,
+      pageCount: 0,
+      pageSize: 3,
+      pageNum: 1
+    }
   },
   getters: {},
   actions: {
-    fetchMeetups({ state, commit }, options = {}) {
-      commit("meetups/setMeetups", [], { root: true });
+    fetchMeetups({ state, commit }, options = { reset: true }) {
+      if (options.reset) {
+        commit("meetups/setMeetups", [], { root: true });
+      }
       const url = applyFilters("/api/v1/meetups", options.filter);
       return axios.get(url).then(res => {
-        const meetups = res.data;
+        const { meetups, count, pageCount } = res.data;
         commit("meetups/setMeetups", meetups, { root: true });
+        commit("setPagination", { count, pageCount });
         return state.meetups;
       });
     },
@@ -88,9 +97,12 @@ export default {
     deleteMeetup(_, meetupId) {
       return axiosInstance.delete(`/api/v1/meetups/${meetupId}`).then(res => {
         const meetupId = res.data;
-        // commit("mergeMeetup", updatedMeetup);
         return meetupId;
       });
+    },
+    initializePagesFromQuery({ commit }, { pageSize, pageNum }) {
+      commit("setPage", pageNum);
+      commit("setPageSize", pageSize);
     }
   },
   mutations: {
@@ -105,6 +117,16 @@ export default {
     },
     addUsersToMeetup(state, joinedPeople) {
       Vue.set(state.meetup, "joinedPeople", joinedPeople);
+    },
+    setPagination(state, { count, pageCount }) {
+      Vue.set(state.pagination, "count", count);
+      Vue.set(state.pagination, "pageCount", pageCount);
+    },
+    setPage(state, pageNum) {
+      Vue.set(state.pagination, "pageNum", +pageNum);
+    },
+    setPageSize(state, pageSize) {
+      Vue.set(state.pagination, "pageSize", pageSize);
     }
   }
 };

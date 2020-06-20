@@ -14,6 +14,7 @@ import PageSecret from "@/pages/PageSecret";
 import PageNotFound from "@/pages/PageNotFound";
 import PageNotAuthenticated from "@/pages/PageNotAuthenticated";
 import PageProfile from "@/pages/PageProfile";
+import PageActivateUser from "@/pages/PageActivateUser";
 
 Vue.use(Router);
 
@@ -40,6 +41,12 @@ const router = new Router({
       path: "/register",
       name: "PageRegister",
       component: PageRegister,
+      meta: { onlyGuestUser: true }
+    },
+    {
+      path: "/users/:hash/activate",
+      name: "PageActivateUser",
+      component: PageActivateUser,
       meta: { onlyGuestUser: true }
     },
     {

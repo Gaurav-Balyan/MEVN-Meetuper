@@ -56,6 +56,9 @@ export default {
         .post("/api/v1/users/register", payload.userData)
         .catch(err => rejectError(err));
     },
+    activateUser(_, hash) {
+      return axios.patch(`/api/v1/users/${hash}/activate`);
+    },
     getAuthUser({ commit, getters }) {
       const authUser = getters["authUser"];
       const token = localStorage.getItem("meetuper-jwt");
