@@ -6,6 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "start": "npm run start --prefix server",
+    "heroku-postbuild": "npm run build",
     "updateGeoipDB": "node node_modules/geoip-lite/scripts/updatedb.js  license_key=RLN53XbgR85fnGiF",
     "server": "node server/index.js"
   },
@@ -86,5 +88,17 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "description": "```\r npm install\r ```",
+  "main": "babel.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gaurav-Balyan/MEVN-Meetuper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gaurav-Balyan/MEVN-Meetuper/issues"
+  },
+  "homepage": "https://github.com/Gaurav-Balyan/MEVN-Meetuper#readme"
 }

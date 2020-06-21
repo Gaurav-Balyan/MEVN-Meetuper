@@ -14,13 +14,13 @@
         class="media post-item"
       >
         <figure class="media-left is-rounded user-image">
-          <p class="image is-32x32">
+          <p class="image is-32x32" v-if="post.user">
             <img class="is-rounded" :src="post.user.avatar" />
           </p>
         </figure>
         <div class="media-content">
           <div class="content is-medium">
-            <div class="post-content">
+            <div class="post-content" v-if="post.user">
               <strong class="author">{{ post.user.name }}</strong>
               {{ " " }}
               <small class="post-time"> {{ post.updatedAt | fromNow }}</small>

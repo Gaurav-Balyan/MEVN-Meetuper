@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const config = require("../config/dev");
+const config = require("../config");
 
 exports.sendConfirmationEmail = ({ toUser, hash }, callback) => {
   const transporter = nodemailer.createTransport({
