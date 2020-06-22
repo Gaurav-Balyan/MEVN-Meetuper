@@ -1,4 +1,3 @@
-<!-- verified -->
 <template>
   <form class="post-create">
     <div class="field">

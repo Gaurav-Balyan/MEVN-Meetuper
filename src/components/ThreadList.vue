@@ -1,4 +1,3 @@
-<!-- verified -->
 <template>
   <div class="content is-medium">
     <h3 class="title is-3">Threads</h3>

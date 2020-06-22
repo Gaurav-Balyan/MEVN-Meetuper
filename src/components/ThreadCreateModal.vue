@@ -1,4 +1,3 @@
-<!-- verified -->
 <template>
   <div>
     <button @click="isOpen = !isOpen" class="button is-success">

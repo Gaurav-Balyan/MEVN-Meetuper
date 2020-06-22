@@ -1,4 +1,3 @@
-// <!-- verified -->
 import { helpers } from "vuelidate/lib/validators";
 
 // Custom validator

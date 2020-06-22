@@ -1,4 +1,3 @@
-<!-- verified -->
 <template>
   <section class="hero is-success is-fullheight">
     <div class="hero-body">

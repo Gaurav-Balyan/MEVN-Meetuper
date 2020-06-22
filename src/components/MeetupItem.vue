@@ -1,4 +1,3 @@
-<!-- verified -->
 <template>
   <div class="column is-one-third">
     <div class="card is-hoverable large">

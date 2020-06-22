@@ -1,4 +1,3 @@
-<!-- verified -->
 <template>
   <div class="meetup-create-form">
     <div class="current-step is-pulled-right">

@@ -1,4 +1,3 @@
-<!-- verified -->
 <template>
   <div>
     <button

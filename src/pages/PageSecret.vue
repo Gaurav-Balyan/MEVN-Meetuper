@@ -1,4 +1,3 @@
-<!-- verified -->
 <template>
   <h1>I am Secret Page!!!</h1>
 </template>

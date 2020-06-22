@@ -1,4 +1,3 @@
-// <!-- verified -->
 export const rejectError = ({ response = null }) => {
   let message = "Ooops, something went wrong";
 

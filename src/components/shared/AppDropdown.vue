@@ -1,4 +1,3 @@
-<!-- verified -->
 <template>
   <div class="dropdown is-pulled-right is-hoverable">
     <div class="dropdown-trigger">

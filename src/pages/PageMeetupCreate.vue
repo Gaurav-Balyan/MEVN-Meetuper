@@ -1,4 +1,3 @@
-<!-- verified -->
 <template>
   <div class="meetup-create-page">
     <AppHero />

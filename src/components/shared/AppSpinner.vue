@@ -1,4 +1,3 @@
-<!-- verified -->
 <template>
   <div class="sk-circle">
     <div class="sk-circle1 sk-child"></div>

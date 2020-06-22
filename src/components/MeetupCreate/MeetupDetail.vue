@@ -1,4 +1,3 @@
-<!-- verified -->
 <template>
   <form @input="emitFormData">
     <div class="field">

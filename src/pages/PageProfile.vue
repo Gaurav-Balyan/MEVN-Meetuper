@@ -1,4 +1,3 @@
-<!-- verified -->
 <template>
   <div class="columns">
     <div class="container profile">

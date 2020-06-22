@@ -1,4 +1,3 @@
-<!-- verified -->
 <template>
   <div class="meetup-detail-page">
     <section class="hero">
