@@ -19,7 +19,7 @@ exports.getMeta = function(req, res) {
         const geo = geoip.lookup(ip);
         return res.json(geo);
       } else {
-        return res.send(422).send({ errors: "Cannot get location from IP" });
+        return res.status(422).send({ errors: "Cannot get location from IP" });
       }
     });
   }

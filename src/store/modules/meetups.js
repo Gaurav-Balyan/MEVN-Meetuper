@@ -31,10 +31,10 @@ export default {
       });
     },
     fetchMeetupById({ state, commit }, payload) {
-      commit("setMeetup", {}, { root: true });
+      commit("setMeetup", {});
       return axios.get(`/api/v1/meetups/${payload.meetupId}`).then(res => {
         const meetup = res.data;
-        commit("meetups/setMeetup", meetup, { root: true });
+        commit("setMeetup", meetup);
         return state.meetup;
       });
     },
