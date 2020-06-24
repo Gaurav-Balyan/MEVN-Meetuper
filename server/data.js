@@ -191,6 +191,7 @@ module.exports = {
       updatedAt: moment().toISOString(),
       username: "gBalyan",
       password: "test",
+      active: true,
       joinedMeetups: [meetup3Id, meetup4Id, meetup5Id, meetup6Id]
     },
     {
@@ -199,11 +200,12 @@ module.exports = {
         "https://www.clipartmax.com/png/middle/195-1956720_%5B-img%5D-avatar.png",
       email: "shanu@gmail.com",
       name: "Shubhakshi Goyal",
-      info: "Information about Peter Green",
+      info: "Information about Shubhakshi Goyal",
       createdAt: moment().toISOString(),
       updatedAt: moment().toISOString(),
-      username: "shanu",
+      username: "sGoyal",
       password: "test",
+      active: true,
       joinedMeetups: [meetup1Id]
     },
     {
@@ -215,8 +217,9 @@ module.exports = {
       info: "I have a famous name",
       createdAt: moment().toISOString(),
       updatedAt: moment().toISOString(),
-      username: "maddy",
+      username: "mGoyal",
       password: "test",
+      active: true,
       joinedMeetups: [meetup2Id, meetup3Id, meetup4Id, meetup5Id, meetup6Id]
     }
   ],
