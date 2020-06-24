@@ -42,13 +42,13 @@ module.exports = {
   meetups: [
     {
       _id: meetup1Id,
-      location: "Bratislava, SK",
-      processedLocation: "bratislavask",
+      location: "Mumbai, IN",
+      processedLocation: "mumbaiin",
       title: "Night in the City",
       image:
         "https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2452&q=80",
       description:
-        "Slovakia's capital since the country's independence in 1993, Bratislava is a mosaic of illustrious history: a medieval and Gothic old town, baroque palaces commissioned by Hungarian nobles, and the crowning castle, rebuilt to Renaissance finery. Slicing through the city are stark-angled, communist-era blocks and a futurist bridge. Recent years have added a cast of outlandish statues, boutiques and modish cafes, eagerly sought out by visiting stag party groups and day trippers from Vienna. Many arrive purely to enjoy the uproarious nightlife, from rowdy beer halls to hidden nightclubs.",
+        "Nightlife is a collective term for entertainment that is available and generally more popular from the late evening into the early hours of the morning.It includes pubs, bars, nightclubs, parties, live music, concerts, cabarets, theatre, cinemas, and shows.",
       shortInfo: "Let's go out!",
       createdAt: moment().toISOString(),
       updatedAt: moment().toISOString(),
@@ -65,13 +65,13 @@ module.exports = {
     },
     {
       _id: meetup2Id,
-      location: "New York, US",
-      processedLocation: "newyorkus",
-      title: "Batman Screening",
+      location: "Noida, IN",
+      processedLocation: "noidain",
+      title: "Dhoom Screening",
       image:
-        "https://images.unsplash.com/photo-1526906004573-b4a4fcd642fe?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
+        "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
       description:
-        "One of the most iconic fictional characters in the world, Batman has dedicated his life to an endless crusade, a war on all criminals in the name of his murdered parents, who were taken from him when he was just a child. Since that tragic night, he has trained his body and mind to near physical perfection to be a self-made Super Hero. He's developed an arsenal of technology that would put most armies to shame. And he's assembled teams of his fellow DC Super Heroes, like the Justice League, the Outsiders and Batman, Incorporated.",
+        "A film screening is the displaying of a motion picture or film, generally referring to a special showing as part of a film's production and release cycle. To show the film to best advantage, special screenings may take place in plush, low seat-count theaters with very high quality (sometimes especially certified) projection and sound equipment, and can be accompanied by food and drink and spoken remarks by producers, writers, or actors.",
       shortInfo: "Batman premiere tomorrow!",
       createdAt: moment().toISOString(),
       updatedAt: moment().toISOString(),
@@ -88,14 +88,14 @@ module.exports = {
     },
     {
       _id: meetup3Id,
-      location: "Lisbon, PT",
-      processedLocation: "lisbonpt",
-      title: "Cycling in Almada",
+      location: "Delhi, IN",
+      processedLocation: "delhiin",
+      title: "Cycling in Delhi",
       image:
         "https://images.unsplash.com/photo-1534787238916-9ba6764efd4f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2389&q=80",
       description:
-        "Human presence in the area of Almada dates to the end of the Neolithic period about 5000 years ago; archeological excavations performed in the municipality suggest that non-sedentary nomadic tribes may have occupied this location sporadically. The gradual development of settlement here made its greatest advance with the coming of Islamic civilization, when Muslims constructed a fort at Almada to defend and monitor the entrance to the Tagus River.",
-      shortInfo: "Very nice trip in Portugal",
+        'Cycling, also called bicycling or biking, is the use of bicycles for transport, recreation, exercise or sport.People engaged in cycling are referred to as "cyclists", "bicyclists", or "bikers".Apart from two-wheeled bicycles, "cycling" also includes the riding of unicycles, tricycles, quadracycles, recumbent and similar human-powered vehicles (HPVs).',
+      shortInfo: "Very nice trip in Delhi",
       createdAt: moment().toISOString(),
       updatedAt: moment().toISOString(),
       startDate: moment()
@@ -111,13 +111,13 @@ module.exports = {
     },
     {
       _id: meetup4Id,
-      location: "Los Angeles, US",
-      processedLocation: "losangelesus",
-      title: "New Aquaman",
+      location: "Goa, IN",
+      processedLocation: "goain",
+      title: "Snorkeling",
       image:
         "https://images.unsplash.com/photo-1512136146408-dab5f2ba8ebb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80",
       description:
-        "An action-packed adventure that spans the vast, visually breathtaking underwater world of the seven seas, “Aquaman” reveals the origin story of half-human, half-Atlantean Arthur Curry and takes him on the journey of his lifetime—one that will not only force him to face who he really is, but to discover if he is worthy of who he was born to be…a king.",
+        "Snorkeling (British and Commonwealth English spelling: snorkelling) is the practice of swimming on or through a body of water while equipped with a diving mask, a shaped breathing tube called a snorkel, and usually swimfins.",
       shortInfo: "Let's go watch new Aquaman",
       createdAt: moment().toISOString(),
       updatedAt: moment().toISOString(),
@@ -134,14 +134,14 @@ module.exports = {
     },
     {
       _id: meetup5Id,
-      location: "Berlin, GE",
-      processedLocation: "berlinge",
-      title: "Burger Festival",
+      location: "Chennai, IN",
+      processedLocation: "chennaiin",
+      title: "Smoothie Festival",
       image:
-        "https://images.unsplash.com/photo-1536510233921-8e5043fce771?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1671&q=80",
+        "https://images.unsplash.com/photo-1588673523898-687eaf18c036?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=423&q=80",
       description:
-        "BurgerFest is located along Main and Buffalo Streets and in the Village of Hamburg Municipal Parking Lot. The Taste of Hamburg portion of the festival features the favorite offerings of area restaurants, in the parking lot.  The one-day festival has something for everyone, from Kids Space children’s inflatable rides and activities; an arts and crafts show and sale, the Classic Car Show and the Beer Tent.",
-      shortInfo: "Burger Festival in the Town!",
+        "A smoothie is a drink made from pureed raw fruit and/or vegetables, typically using a blender.A smoothie often has a liquid base such as water, fruit juice, plant milk, and sometimes dairy products, such as (milk, yogurt, ice cream or cottage cheese). Smoothies may be made using other ingredients, such as crushed ice, sweeteners, vinegar, (honey or sugar), whey powder, chocolate or nutritional supplements, among others by personal choice.",
+      shortInfo: "Smoothie Festival in the Town!",
       createdAt: moment().toISOString(),
       updatedAt: moment().toISOString(),
       startDate: moment()
@@ -157,13 +157,13 @@ module.exports = {
     },
     {
       _id: meetup6Id,
-      location: "London, UK",
-      processedLocation: "londonuk",
-      title: "London Marathon",
+      location: "Mumbai, IN",
+      processedLocation: "mumbaiin",
+      title: "Mumbai Marathon",
       image:
         "https://images.unsplash.com/photo-1513276193780-64b881470da8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
       description:
-        "In a nod to Greek history, the first marathon commemorated the run of the soldier Pheidippides from a battlefield near the town of Marathon, Greece, to Athens in 490 B.C. According to legend, Pheidippides ran the approximately 25 miles to announce the defeat of the Persians to some anxious Athenians.",
+        "The Mumbai Marathon, is an annual international marathon held in Mumbai, India, on the third Sunday of January every year. It is the largest marathon in Asia as well as the largest mass participation sporting event on the continent. It is the richest race in India with a prize pool of US$405,000.",
       shortInfo: "Little bit of exercise!",
       createdAt: moment().toISOString(),
       updatedAt: moment().toISOString(),
@@ -184,39 +184,39 @@ module.exports = {
       _id: user1Id,
       avatar:
         "https://b.kisscc0.com/20180718/urw/kisscc0-ninja-computer-icons-samurai-youtube-avatar-ninja-5b4ed903c2dd20.4931332915318940197982.jpg",
-      email: "filip@gmail.com",
-      name: "Filip Jerga",
-      info: "Bla bla bla bla",
+      email: "gaurav@gmail.com",
+      name: "Gaurav Balyan",
+      info: "Information about Gaurav Balyan",
       createdAt: moment().toISOString(),
       updatedAt: moment().toISOString(),
-      username: "Rhonyn99",
-      password: "testtest",
+      username: "gBalyan",
+      password: "test",
       joinedMeetups: [meetup3Id, meetup4Id, meetup5Id, meetup6Id]
     },
     {
       _id: user2Id,
       avatar:
         "https://www.clipartmax.com/png/middle/195-1956720_%5B-img%5D-avatar.png",
-      email: "peter@gmail.com",
-      name: "Peter Green",
-      info: "Bla bla bla bla",
+      email: "shanu@gmail.com",
+      name: "Shubhakshi Goyal",
+      info: "Information about Peter Green",
       createdAt: moment().toISOString(),
       updatedAt: moment().toISOString(),
-      username: "Petergreen",
-      password: "testtest1",
+      username: "shanu",
+      password: "test",
       joinedMeetups: [meetup1Id]
     },
     {
       _id: user3Id,
       avatar:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuqyc3j2s3bL4DIkC8uC9h0rcAdsDXcwJPNh8XHWbLQfHbOpVU",
-      email: "kevin@gmail.com",
-      name: "Kevin Rock",
+      email: "madhav@gmail.com",
+      name: "Madhav Goel",
       info: "I have a famous name",
       createdAt: moment().toISOString(),
       updatedAt: moment().toISOString(),
-      username: "Kevin21",
-      password: "testtest2",
+      username: "maddy",
+      password: "test",
       joinedMeetups: [meetup2Id, meetup3Id, meetup4Id, meetup5Id, meetup6Id]
     }
   ],
@@ -241,7 +241,7 @@ module.exports = {
     },
     {
       _id: thread3Id,
-      title: "Here should be something about thread 3",
+      title: "Here should be something",
       createdAt: moment().toISOString(),
       updatedAt: moment().toISOString(),
       meetup: meetup2Id,
@@ -370,7 +370,7 @@ module.exports = {
       _id: category1Id,
       name: "sport",
       image:
-        "https://images.unsplash.com/photo-1508355991726-ebd81e4802f7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1506&q=80"
+        "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1167&q=80"
     },
     {
       _id: category2Id,
@@ -386,7 +386,7 @@ module.exports = {
       _id: category3Id,
       name: "music",
       image:
-        "https://images.unsplash.com/photo-1511735111819-9a3f7709049c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1334&q=80"
+        "https://images.unsplash.com/photo-1569634311433-afb9edb8a3f4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
     },
     {
       _id: category4Id,
@@ -410,7 +410,7 @@ module.exports = {
       _id: category6Id,
       name: "food",
       image:
-        "https://images.unsplash.com/photo-1536510233921-8e5043fce771?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1542&q=80"
+        "https://images.unsplash.com/photo-1572490122747-3968b75cc699?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
     },
     {
       _id: mongoose.Types.ObjectId(),
