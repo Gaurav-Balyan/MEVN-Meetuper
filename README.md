@@ -1,5 +1,9 @@
 # vue-meetup-starter
 
+## Project Compatibilty
+Requires node=8.1.4
+nvm use 8.1.4
+
 ## Project setup
 ```
 npm install
