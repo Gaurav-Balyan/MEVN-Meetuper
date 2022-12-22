@@ -31,7 +31,7 @@
     "geoip-lite": "^1.4.2",
     "http-proxy-middleware": "^0.19.1",
     "http2": "^3.3.7",
-    "jsonwebtoken": "^8.4.0",
+    "jsonwebtoken": "^9.0.0",
     "moment": "^2.23.0",
     "mongoose": "^5.4.7",
     "morgan": "^1.9.1",
